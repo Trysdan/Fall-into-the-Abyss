@@ -15,7 +15,7 @@ StartState = Class{__includes = BaseState}
 local options = { 'play', 'credits', 'quit game' }
 
 function StartState:init()
-    SOUNDS['start-music']:setVolume(0.3)
+    SOUNDS['start-music']:setVolume(0.5)
     SOUNDS['start-music']:setLooping(true)
     SOUNDS['start-music']:play()
     self.option = 1
@@ -34,7 +34,7 @@ function StartState:update(dt)
         if self.option == 1 then
             stateMachine:change('select')
         elseif self.option == 2 then
-            -- stateMachine:change('credits')
+            stateMachine:change('credits')
         else
             love.event.quit()
         end
@@ -44,6 +44,8 @@ end
 function wasPressedAny(keys)
     for _, key in ipairs(keys) do
         if love.keyboard.wasPressed(key) then
+            SOUNDS['switch']:stop()
+            SOUNDS['switch']:play()
             return true
         end
     end
@@ -57,11 +59,11 @@ function StartState:render()
 
     love.graphics.setFont(FONTS['title'])
     
-    love.graphics.setColor(0.13, 0.13, 0.13, 1)
+    love.graphics.setColor(love.math.colorFromBytes(34, 34, 34, 255))
     love.graphics.printf('Fall into the', OFFSET_TITLE_X + 2, OFFSET_TITLE_Y + 2, VIRTUAL_WIDTH, 'left')
     love.graphics.printf('Abyss', OFFSET_TITLE_X + 12, OFFSET_TITLE_Y + 32, VIRTUAL_WIDTH, 'left')
     
-    love.graphics.setColor(0.69, 0.21, 0.16, 1)
+    love.graphics.setColor(love.math.colorFromBytes(175, 53, 42, 255))
     love.graphics.printf('Fall into the', OFFSET_TITLE_X, OFFSET_TITLE_Y, VIRTUAL_WIDTH, 'left')
     love.graphics.printf('Abyss', OFFSET_TITLE_X + 10, OFFSET_TITLE_Y + 30, VIRTUAL_WIDTH, 'left')
 
@@ -69,13 +71,13 @@ function StartState:render()
 
     for i, label in ipairs(options) do
         local yOffset = VIRTUAL_HEIGHT / 2 + 16 + (i - 1) * 24
-        love.graphics.setColor(0, 0, 0, 255)
+        love.graphics.setColor(love.math.colorFromBytes(0, 0, 0, 255))
         love.graphics.printf(label, OFFSET_TITLE_X + 1, yOffset + 1, VIRTUAL_WIDTH, 'left')
 
         if self.option == i then
-            love.graphics.setColor(255, 255, 0, 255)
+            love.graphics.setColor(love.math.colorFromBytes(255, 255, 0, 255))
         else
-            love.graphics.setColor(255, 255, 255, 255)
+            love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))
         end
         love.graphics.printf(label, OFFSET_TITLE_X, yOffset, VIRTUAL_WIDTH, 'left')
     end

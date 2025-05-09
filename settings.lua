@@ -18,8 +18,8 @@ require 'src/StateMachine'
 require 'src/states/BaseState'
 
 require 'src/states/game/StartState'
-
 require 'src/states/game/SelectState'
+require 'src/states/game/CreditsState'
 
 VIRTUAL_WIDTH = 384
 VIRTUAL_HEIGHT = 216
@@ -44,9 +44,11 @@ FRAMES = {}
 
 FONTS = {
     ['title'] = love.graphics.newFont('assets/fonts/title.otf', 40),
-    ['title-small'] = love.graphics.newFont('assets/fonts/title.otf', 24)
+    ['title-small'] = love.graphics.newFont('assets/fonts/title.otf', 24),
+    ['credits'] = love.graphics.newFont('assets/fonts/credits.ttf', 10)
 }
 
 SOUNDS = {
-    ['start-music'] = love.audio.newSource('assets/sounds/start_music.mp3', 'static')
+    ['start-music'] = love.audio.newSource('assets/sounds/start_music.mp3', 'static'),
+    ['switch'] = love.audio.newSource('assets/sounds/switch.mp3', 'static')
 }

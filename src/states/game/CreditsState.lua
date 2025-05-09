@@ -9,32 +9,31 @@
     
     Adapted by Jesus Diaz (jdanieldp99@gmail.com) for "Fall into the Abyss" - ULA Game Dev Class 2025
 
-    This file contains the class SelectState for the game.
+    This file contains the class CreditsState for the game.
 ]]
-SelectState = Class{__includes = BaseState}
-local options = { 'new game', 'continue', 'back' }
+CreditsState = Class{__includes = BaseState}
+local credits = {
+    "CREDITS",
+    "",
+    "DEVELOPMENT",
+    "Jesus Diaz",
+    "Ramon Belandria",
+    "",
+    "SPECIAL THANKS",
+    "Prof. Alejandro Mujica",
+    "",
+    "ASSETS",
+    "Music: Kaden_Cook (Pixabay)",
+    "Background: Google AI Tools",
+    "Font: The Legend of the Princess"
+}
 
-function SelectState:init()
-    self.option = 1
+function CreditsState:init()
 end
 
-function SelectState:update(dt)
-    if wasPressedAny(CONTROLS.UP) and self.option > 1 then
-        self.option = self.option - 1
-    end
-
-    if wasPressedAny(CONTROLS.DOWN) and self.option < 3 then
-        self.option = self.option + 1
-    end
-
+function CreditsState:update(dt)
     if wasPressedAny(CONTROLS.SELECT) then
-        if self.option == 1 then
-            -- stateMachine:change('new')
-        elseif self.option == 2 then
-            -- stateMachine:change('continue')
-        else
-            stateMachine:change('start')
-        end
+        stateMachine:change('start')
     end
 end
 
@@ -49,7 +48,7 @@ function wasPressedAny(keys)
     return false
 end
 
-function SelectState:render()
+function CreditsState:render()
     love.graphics.draw(TEXTURES['background'], 0, 0, 0,
         VIRTUAL_WIDTH / TEXTURES['background']:getWidth(),
         VIRTUAL_HEIGHT / TEXTURES['background']:getHeight())
@@ -66,16 +65,27 @@ function SelectState:render()
 
     love.graphics.setFont(FONTS['title-small'])
 
-    for i, label in ipairs(options) do
-        local yOffset = VIRTUAL_HEIGHT / 2 + 16 + (i - 1) * 24
-        love.graphics.setColor(love.math.colorFromBytes(0, 0, 0, 255))
-        love.graphics.printf(label, OFFSET_TITLE_X + 1, yOffset + 1, VIRTUAL_WIDTH, 'left')
+    love.graphics.setColor(love.math.colorFromBytes(0, 0, 0, 255))
+    love.graphics.printf('back', OFFSET_TITLE_X + 1, VIRTUAL_HEIGHT / 2 + 64+ 1, VIRTUAL_WIDTH, 'left')
+    
+    love.graphics.setColor(love.math.colorFromBytes(255, 255, 0, 255))
+    love.graphics.printf('back', OFFSET_TITLE_X, VIRTUAL_HEIGHT / 2 + 64, VIRTUAL_WIDTH, 'left')
 
-        if self.option == i then
+    love.graphics.setFont(FONTS['credits'])
+    
+    local y_offset = VIRTUAL_HEIGHT / 4 + 10
+
+    love.graphics.setColor(love.math.colorFromBytes(0, 0, 0, 255))
+    for i, text in ipairs(credits) do
+        love.graphics.printf(text, OFFSET_TITLE_X + 1, y_offset + (i * 9) + 1, VIRTUAL_WIDTH, 'center')
+    end
+    
+    for i, text in ipairs(credits) do
+        if i == 3 or i == 7 or i == 10 then
             love.graphics.setColor(love.math.colorFromBytes(255, 255, 0, 255))
         else
             love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))
         end
-        love.graphics.printf(label, OFFSET_TITLE_X, yOffset, VIRTUAL_WIDTH, 'left')
+        love.graphics.printf(text, OFFSET_TITLE_X, y_offset + (i * 9), VIRTUAL_WIDTH, 'center')
     end
 end

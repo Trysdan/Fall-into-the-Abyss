@@ -22,7 +22,8 @@ function love.load()
 
     stateMachine = StateMachine {
         ['start'] = function() return StartState() end,
-        ['select'] = function() return SelectState() end
+        ['select'] = function() return SelectState() end,
+        ['credits'] = function() return CreditsState() end
     }
 
     stateMachine:change('start')
