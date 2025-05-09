@@ -5,12 +5,14 @@
     Author: Alejandro Mujica
     alejandro.j.mujic4@gmail.com
 
+    Adapted by Jesus Diaz (jdanieldp99@gmail.com) for "Fall into the Abyss" - ULA Game Dev Class 2025
+
     This file contains the framework configuration.
 ]]
 require 'settings'
 
 function love.load()
-    love.window.setTitle("The Legend of the Princess")
+    love.window.setTitle("Fall into the Abyss")
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -19,7 +21,8 @@ function love.load()
     })
 
     stateMachine = StateMachine {
-        ['start'] = function() return StartState() end
+        ['start'] = function() return StartState() end,
+        ['select'] = function() return SelectState() end
     }
 
     stateMachine:change('start')

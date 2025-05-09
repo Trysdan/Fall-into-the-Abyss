@@ -11,17 +11,14 @@
 
     This file contains the class StartState for the game.
 ]]
-StartState = Class{__includes = BaseState}
-local options = { 'play', 'credits', 'quit game' }
+SelectState = Class{__includes = BaseState}
+local options = { 'new game', 'continue', 'back' }
 
-function StartState:init()
-    SOUNDS['start-music']:setVolume(0.3)
-    SOUNDS['start-music']:setLooping(true)
-    SOUNDS['start-music']:play()
+function SelectState:init()
     self.option = 1
 end
 
-function StartState:update(dt)
+function SelectState:update(dt)
     if wasPressedAny(CONTROLS.UP) and self.option > 1 then
         self.option = self.option - 1
     end
@@ -32,11 +29,11 @@ function StartState:update(dt)
 
     if wasPressedAny(CONTROLS.SELECT) then
         if self.option == 1 then
-            stateMachine:change('select')
+            -- stateMachine:change('new')
         elseif self.option == 2 then
-            -- stateMachine:change('credits')
+            -- stateMachine:change('continue')
         else
-            love.event.quit()
+            stateMachine:change('start')
         end
     end
 end
@@ -50,7 +47,7 @@ function wasPressedAny(keys)
     return false
 end
 
-function StartState:render()
+function SelectState:render()
     love.graphics.draw(TEXTURES['background'], 0, 0, 0,
         VIRTUAL_WIDTH / TEXTURES['background']:getWidth(),
         VIRTUAL_HEIGHT / TEXTURES['background']:getHeight())

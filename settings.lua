@@ -19,6 +19,7 @@ require 'src/states/BaseState'
 
 require 'src/states/game/StartState'
 
+require 'src/states/game/SelectState'
 
 VIRTUAL_WIDTH = 384
 VIRTUAL_HEIGHT = 216
@@ -28,6 +29,12 @@ WINDOW_HEIGHT = 720
 
 OFFSET_TITLE_X = 20
 OFFSET_TITLE_Y = 30
+
+CONTROLS = {
+    UP = {'up', 'w'},
+    DOWN = {'down', 's'},
+    SELECT = {'enter', 'return'}
+}
 
 TEXTURES = {
     ['background'] = love.graphics.newImage('assets/textures/background.png')
