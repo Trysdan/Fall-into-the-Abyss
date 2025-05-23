@@ -12,40 +12,31 @@
     This file contains the class CreditsState for the game.
 ]]
 CreditsState = Class{__includes = BaseState}
-local credits = {
-    "CREDITS",
-    "",
-    "DEVELOPMENT",
-    "Jesus Diaz",
-    "Ramon Belandria",
-    "",
-    "SPECIAL THANKS",
-    "Prof. Alejandro Mujica",
-    "",
-    "ASSETS",
-    "Music: Kaden_Cook (Pixabay)",
-    "Background: Google AI Tools",
-    "Font: The Legend of the Princess"
-}
 
 function CreditsState:init()
+    self.credits = {
+        "CREDITS",
+        "",
+        "DEVELOPMENT",
+        "Jesus Diaz",
+        "Ramon Belandria",
+        "",
+        "SPECIAL THANKS",
+        "Prof. Alejandro Mujica",
+        "",
+        "ASSETS",
+        "Music: Kaden_Cook (Pixabay)",
+        "Background: Google AI Tools",
+        "Font: The Legend of the Princess"
+    }
 end
 
 function CreditsState:update(dt)
     if wasPressedAny(CONTROLS.SELECT) then
+        SOUNDS['switch']:stop()
+        SOUNDS['switch']:play()
         stateMachine:change('start')
     end
-end
-
-function wasPressedAny(keys)
-    for _, key in ipairs(keys) do
-        if love.keyboard.wasPressed(key) then
-            SOUNDS['switch']:stop()
-            SOUNDS['switch']:play()
-            return true
-        end
-    end
-    return false
 end
 
 function CreditsState:render()
@@ -76,11 +67,11 @@ function CreditsState:render()
     local y_offset = VIRTUAL_HEIGHT / 4 + 10
 
     love.graphics.setColor(love.math.colorFromBytes(0, 0, 0, 255))
-    for i, text in ipairs(credits) do
+    for i, text in ipairs(self.credits) do
         love.graphics.printf(text, OFFSET_TITLE_X + 1, y_offset + (i * 9) + 1, VIRTUAL_WIDTH, 'center')
     end
     
-    for i, text in ipairs(credits) do
+    for i, text in ipairs(self.credits) do
         if i == 3 or i == 7 or i == 10 then
             love.graphics.setColor(love.math.colorFromBytes(255, 255, 0, 255))
         else

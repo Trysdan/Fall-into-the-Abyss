@@ -15,22 +15,28 @@ StartState = Class{__includes = BaseState}
 local options = { 'play', 'credits', 'quit game' }
 
 function StartState:init()
-    SOUNDS['start-music']:setVolume(0.5)
+    SOUNDS['start-music']:setVolume(0.0)
     SOUNDS['start-music']:setLooping(true)
     SOUNDS['start-music']:play()
     self.option = 1
 end
 
 function StartState:update(dt)
-    if wasPressedAny(CONTROLS.UP) and self.option > 1 then
+    if wasPressedAny(CONTROLS.MOVE_UP) and self.option > 1 then
+        SOUNDS['switch']:stop()
+        SOUNDS['switch']:play()
         self.option = self.option - 1
     end
 
-    if wasPressedAny(CONTROLS.DOWN) and self.option < 3 then
+    if wasPressedAny(CONTROLS.MOVE_DOWN) and self.option < 3 then
+        SOUNDS['switch']:stop()
+        SOUNDS['switch']:play()
         self.option = self.option + 1
     end
 
     if wasPressedAny(CONTROLS.SELECT) then
+        SOUNDS['switch']:stop()
+        SOUNDS['switch']:play()
         if self.option == 1 then
             stateMachine:change('select')
         elseif self.option == 2 then
@@ -39,17 +45,6 @@ function StartState:update(dt)
             love.event.quit()
         end
     end
-end
-
-function wasPressedAny(keys)
-    for _, key in ipairs(keys) do
-        if love.keyboard.wasPressed(key) then
-            SOUNDS['switch']:stop()
-            SOUNDS['switch']:play()
-            return true
-        end
-    end
-    return false
 end
 
 function StartState:render()

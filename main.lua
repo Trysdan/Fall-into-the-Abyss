@@ -23,7 +23,10 @@ function love.load()
     stateMachine = StateMachine {
         ['start'] = function() return StartState() end,
         ['select'] = function() return SelectState() end,
-        ['credits'] = function() return CreditsState() end
+        ['credits'] = function() return CreditsState() end,
+        ['new'] = function() return NewState() end,
+        ['continue'] = function() return ContinueState() end,
+        ['play'] = function() return PlayState() end
     }
 
     stateMachine:change('start')
@@ -46,6 +49,6 @@ end
 
 function love.draw()
     push:start()
-    stateMachine:render()
+        stateMachine:render()
     push:finish()
 end

@@ -18,20 +18,24 @@ function SelectState:init()
     self.option = 1
 end
 
+function SelectState:exit()
+    SOUNDS['start-music']:stop()
+end
+
 function SelectState:update(dt)
-    if wasPressedAny(CONTROLS.UP) and self.option > 1 then
+    if wasPressedAny(CONTROLS.MOVE_UP) and self.option > 1 then
         self.option = self.option - 1
     end
 
-    if wasPressedAny(CONTROLS.DOWN) and self.option < 3 then
+    if wasPressedAny(CONTROLS.MOVE_DOWN) and self.option < 3 then
         self.option = self.option + 1
     end
 
     if wasPressedAny(CONTROLS.SELECT) then
         if self.option == 1 then
-            -- stateMachine:change('new')
+            stateMachine:change('new')
         elseif self.option == 2 then
-            -- stateMachine:change('continue')
+            --stateMachine:change('continue')
         else
             stateMachine:change('start')
         end
