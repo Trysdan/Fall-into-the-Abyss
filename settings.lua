@@ -16,7 +16,12 @@ sti = require 'lib/sti'
 bump = require 'lib/bump'      
 camera = require 'lib/camera'    
 
+require 'src/Animation'
 require 'src/StateMachine'
+require 'src/Entity'
+require 'src/Player'
+
+require 'src/definitions/entity'
 
 require 'src/states/BaseState'
 
@@ -27,7 +32,21 @@ require 'src/states/game/NewState'
 require 'src/states/game/ContinueState'
 require 'src/states/game/PlayState'
 
-require 'src/states/entity/Player'
+require 'src/states/entity/EntityIdleState'
+require 'src/states/entity/EntityWalkState'
+require 'src/states/entity/EntityJumpState'
+require 'src/states/entity/EntityFallState'
+require 'src/states/entity/EntityAttackState'
+require 'src/states/entity/EntityDeadState'
+
+require 'src/states/entity/player/PlayerIdleState'
+require 'src/states/entity/player/PlayerWalkState'
+require 'src/states/entity/player/PlayerJumpState'
+require 'src/states/entity/player/PlayerFallState'
+require 'src/states/entity/player/PlayerAttackState'
+require 'src/states/entity/player/PlayerDeadState'
+
+require 'src/utilities/quads'
 
 VIRTUAL_WIDTH = 384
 VIRTUAL_HEIGHT = 216
@@ -48,12 +67,10 @@ CONTROLS = {
     ROLL = {'lshift', 'rshift'},    
     INTERACT = {'f'},
 
-    ATTACK_PRIMARY = {'mouse:1'},
-    ATTACK_SECONDARY = {'mouse:2'},
+    ATTACK_PRIMARY = {'e'},
+    ATTACK_SECONDARY = {'q'},
     
-    SKILL_1 = {'q'},
-    SKILL_2 = {'e'},
-    SKILL_3 = {'r'},
+    SKILL = {'r'},
 
     PAUSE = {'escape', 'p'},
     INVENTORY = {'tab', 'i'},
@@ -63,10 +80,13 @@ CONTROLS = {
 }
 
 TEXTURES = {
-    ['background'] = love.graphics.newImage('assets/textures/background.png')
+    ['background'] = love.graphics.newImage('assets/textures/background.png'),
+    ['character'] = love.graphics.newImage('assets/textures/character/spritesheet.png')
 }
 
-FRAMES = {}
+FRAMES = {
+    ['character'] = generateQuads(TEXTURES['character'], 32, 32)
+}
 
 FONTS = {
     ['title'] = love.graphics.newFont('assets/fonts/title.otf', 40),

@@ -29,7 +29,30 @@ function PlayState:enter(params)
         end
     end
 
-    self.player = Player(self.world, params.playerStartX, params.playerStartY)
+    self.player = Player {
+        animations = ENTITY_DEFS['player'].animations,
+        walkSpeed = ENTITY_DEFS['player'].walkSpeed,
+        world = self.world,
+        x = params.playerStartX or 64,
+        y = params.playerStartY or 64,
+        width = 32,
+        height = 32,
+        jumpVelocity = -200,
+        gravity = 500
+    }
+
+    self.player.stateMachine = StateMachine {
+        ['idle'] = function() return PlayerIdleState(self.player, self.world) end,
+        ['walk'] = function() return PlayerWalkState(self.player, self.world) end,
+        ['jump'] = function() return PlayerJumpState(self.player, self.world) end,
+        ['fall'] = function() return PlayerFallState(self.player, self.world) end,
+        ['attack'] = function() return PlayerAttackState(self.player, self.world) end,
+        ['dead'] = function() return PlayerDeadState(self.player, self.world) end
+    }
+
+    self.player:changeState('idle')
+    
+    self.camera = camera()
 end
 
 function PlayState:update(dt)
@@ -38,6 +61,7 @@ function PlayState:update(dt)
     end
     self.player:update(dt)
     self.map:update(dt)
+    self.camera:lookAt(self.player.x, self.player.y)
 end
 
 function PlayState:render()
