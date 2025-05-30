@@ -140,6 +140,9 @@ function Entity:updatePosition(dt)
             self.dy = 0
         elseif col.normal.y == 1 then
             self.dy = 0
+            
+            -- Small adjustment to avoid being trapped on the roof
+            self.y = self.y + 1
         end
         
         if col.normal.x ~= 0 then
