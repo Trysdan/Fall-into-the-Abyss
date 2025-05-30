@@ -1,13 +1,16 @@
-PlayerJumpState = Class{__includes = EntityJumpState}
+PlayerJumpState = Class{__includes = BaseState}
 
-function PlayerJumpState:init(entity, world)
-    self.entity = entity
-    self.world = world
+function PlayerJumpState:init(player)
+    self.entity = player
     self.entity:changeAnimation('jump')
     self.entity.dy = self.entity.jumpVelocity
 end
 
 function PlayerJumpState:update(dt)
+    if self.entity.dy > 0 then
+        self.entity:changeState('fall')
+    end
+    
     if isDownAny(CONTROLS.MOVE_LEFT) then
         self.entity.direction = 'left'
         self.entity.dx = -self.entity.walkSpeed
@@ -16,9 +19,11 @@ function PlayerJumpState:update(dt)
         self.entity.dx = self.entity.walkSpeed
     end
 
-    if wasPressedAny(CONTROLS.ATTACK_PRIMARY) then
+    if wasPressedAny(CONTROLS.JUMP) and self.entity.dobleJump then
+        self.entity.dy = -self.entity.jumpVelocity
+        self.entity:changeState('jump')
+        self.entity.dobleJump = false
+    elseif wasPressedAny(CONTROLS.ATTACK_PRIMARY) then
         self.entity:changeState('attack')
     end
-
-    EntityJumpState.update(self, dt)
 end

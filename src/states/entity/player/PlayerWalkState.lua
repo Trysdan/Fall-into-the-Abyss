@@ -1,13 +1,16 @@
-PlayerWalkState = Class{__includes = EntityWalkState}
+PlayerWalkState = Class{__includes = BaseState}
 
-function PlayerWalkState:init(entity, world)
-    self.entity = entity
-    self.world = world
+function PlayerWalkState:init(player)
+    self.entity = player
     self.entity:changeAnimation('walk')
 end
 
 function PlayerWalkState:update(dt)
     self.entity.dx = 0
+    
+    if self.entity.dy > 0 then
+        self.entity:changeState('fall')
+    end
 
     if isDownAny(CONTROLS.MOVE_LEFT) then
         self.entity.direction = 'left'
@@ -25,6 +28,4 @@ function PlayerWalkState:update(dt)
     elseif wasPressedAny(CONTROLS.ATTACK_PRIMARY) then
         self.entity:changeState('attack')
     end
-
-    EntityWalkState.update(self, dt)
 end

@@ -4,6 +4,8 @@
 
     Author: Colton Ogden
     cogden@cs50.harvard.edu
+    
+    Adapted by Jesus Diaz (jdanieldp99@gmail.com) for "Fall into the Abyss" - ULA Game Dev Class 2025
 
     This file contains the class Animation.
 ]]
@@ -14,6 +16,9 @@ function Animation:init(def)
     self.interval = def.interval
     self.texture = def.texture
     self.looping = def.looping or true
+    
+    -- used to have a customized collision box per frame
+    self.collisionBoxes = def.collisionBoxes
 
     self.timer = 0
     self.currentFrame = 1
@@ -45,6 +50,9 @@ function Animation:update(dt)
 
             -- if we've looped back to the beginning, record
             if self.currentFrame == 1 then
+                if not self.looping then
+                    self.currentFrame = #self.frames
+                end
                 self.timesPlayed = self.timesPlayed + 1
             end
         end

@@ -1,12 +1,15 @@
-PlayerIdleState = Class{__includes = EntityIdleState}
+PlayerIdleState = Class{__includes = BaseState}
 
-function PlayerIdleState:init(entity, world)
-    self.entity = entity
-    self.world = world
+function PlayerIdleState:init(player)
+    self.entity = player
     self.entity:changeAnimation('idle')
 end
 
 function PlayerIdleState:update(dt)
+    if self.entity.dy > 0 then
+        self.entity:changeState('fall')
+    end
+    
     if isDownAny(CONTROLS.MOVE_LEFT) or isDownAny(CONTROLS.MOVE_RIGHT) then
         if isDownAny(CONTROLS.MOVE_LEFT) then
             self.entity.direction = 'left'

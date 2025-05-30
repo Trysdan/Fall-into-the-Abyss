@@ -32,13 +32,6 @@ require 'src/states/game/NewState'
 require 'src/states/game/ContinueState'
 require 'src/states/game/PlayState'
 
-require 'src/states/entity/EntityIdleState'
-require 'src/states/entity/EntityWalkState'
-require 'src/states/entity/EntityJumpState'
-require 'src/states/entity/EntityFallState'
-require 'src/states/entity/EntityAttackState'
-require 'src/states/entity/EntityDeadState'
-
 require 'src/states/entity/player/PlayerIdleState'
 require 'src/states/entity/player/PlayerWalkState'
 require 'src/states/entity/player/PlayerJumpState'
@@ -56,6 +49,8 @@ WINDOW_HEIGHT = VIRTUAL_HEIGHT * 3
 
 OFFSET_TITLE_X = 20
 OFFSET_TITLE_Y = 30
+
+SHOW_HITBOXES = false
 
 CONTROLS = {
     MOVE_UP = {'up', 'w'},

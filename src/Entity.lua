@@ -15,42 +15,51 @@ Entity = Class{}
 
 function Entity:init(def)
     self.world = def.world
+
+    self.stateMachine = StateMachine(def.states or {})
+    
+    self.direction = 'right'
+
+    self.animations = self:createAnimations(def.animations or {})
+    self.currentAnimation = def.currentAnimation or self.animations['idle']
+
     self.x = def.x or 0
     self.y = def.y or 0
-    self.dx = 0
-    self.dy = 0
-
     self.width = def.width or 16
     self.height = def.height or 32
+    
+    self.dx = 0
+    self.dy = 0
+    
+    self.hitbox = {
+        x = self.x + 6,
+        y = self.y + 4,
+        width = 16,
+        height = 28,
+        offsetX = 6,
+        offsetY = 4
+    }
+
+    self.updateHitbox(self)
+    self.world:add(self, self.hitbox.x, self.hitbox.y, self.hitbox.width, self.hitbox.height)
 
     self.walkSpeed = def.walkSpeed or 60
-    self.jumpVelocity = def.jumpVelocity or -200
+    self.jumpVelocity = def.jumpVelocity or -250
     self.gravity = def.gravity or 500
 
     self.health = def.health or 1
+
+    -- flags for flashing the entity when hit
     self.invulnerable = false
-    self.invulnerableTimer = 0
     self.invulnerableDuration = 0
+    self.invulnerableTimer = 0
+    self.flashTimer = 0
 
     self.dead = false
-
-    self.stateMachine = StateMachine(def.states or {})
-    self.animations = self:createAnimations(def.animations or {})
-    self.currentAnimation = {
-        frames = {25, 26, 27, 28, 29, 30},
-        interval = 0.2,
-        texture = 'character'
-    }
-
-    self.offsetX = def.offsetX or 0
-    self.offsetY = def.offsetY or 0
-
-    self.direction = 'right'
     
     self.bumped = false
     self.isOnGround = false
-    self.dobleJump = false
-    self.world:add(self, self.x, self.y, self.width, self.height)
+    self.dobleJump = true
 end
 
 function Entity:createAnimations(animations)
@@ -60,7 +69,8 @@ function Entity:createAnimations(animations)
             texture = animDef.texture,
             frames = animDef.frames,
             interval = animDef.interval,
-            looping = animDef.looping or true
+            looping = animDef.looping or true,
+            collisionBoxes = animDef.collisionBoxes
         }
     end
     return result
@@ -75,6 +85,18 @@ function Entity:changeState(state)
 end
 
 function Entity:update(dt)
+    if self.invulnerable then
+        self.flashTimer = self.flashTimer + dt
+        self.invulnerableTimer = self.invulnerableTimer + dt
+
+        if self.invulnerableTimer > self.invulnerableDuration then
+            self.invulnerable = false
+            self.invulnerableTimer = 0
+            self.invulnerableDuration = 0
+            self.flashTimer = 0
+        end
+    end
+
     self.stateMachine:update(dt)
     
     self:updatePosition(dt)
@@ -82,17 +104,11 @@ function Entity:update(dt)
     if self.currentAnimation then
         self.currentAnimation:update(dt)
     end
-    
-    if self.invulnerable then
-        self.invulnerableTimer = self.invulnerableTimer + dt
-        if self.invulnerableTimer > self.invulnerableDuration then
-            self.invulnerable = false
-            self.invulnerableTimer = 0
-        end
-    end
 end
 
 function Entity:updatePosition(dt)
+    self:updateHitbox()
+    
     if not self.isOnGround then
         self.dy = self.dy + self.gravity * dt
     end
@@ -100,13 +116,18 @@ function Entity:updatePosition(dt)
     local goalX = self.x + self.dx * dt
     local goalY = self.y + self.dy * dt
 
+    self.world:update(self, self.hitbox.x, self.hitbox.y, 
+                     self.hitbox.width, self.hitbox.height)
+
     local actualX, actualY, cols, len = self.world:move(
         self, 
-        goalX, 
-        goalY, 
+        goalX,
+        goalY + self.hitbox.offsetY,
         function(other) return 'slide' end
     )
-    self.x, self.y = actualX, actualY
+    
+    self.x = actualX
+    self.y = actualY - self.hitbox.offsetY
 
     self.isOnGround = false
     self.bumped = false
@@ -114,9 +135,11 @@ function Entity:updatePosition(dt)
     for i = 1, len do
         local col = cols[i]
         
-        if col.normal.y ~= 0 then
-            self.isOnGround = col.normal.y == -1
-            self.dobleJump = self.isOnGround
+        if col.normal.y == -1 then
+            self.isOnGround = true
+            self.dobleJump = true
+            self.dy = 0
+        elseif col.normal.y == 1 then
             self.dy = 0
         end
         
@@ -127,25 +150,46 @@ function Entity:updatePosition(dt)
     end
 end
 
+function Entity:updateHitbox()
+    local box = getEntityCollisionBox(self)
+    self.hitbox = {
+        x = self.x,
+        y = self.y + box.y,
+        width = box.width,
+        height = box.height,
+        offsetX = box.x,
+        offsetY = box.y
+    }
+end
+
 function Entity:render()
+    -- draw sprite slightly transparent if invulnerable every 0.06 seconds
+    if self.invulnerable and self.flashTimer > 0.06 then
+        self.flashTimer = 0
+        love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 64))
+    end
+
     local anim = self.currentAnimation
-    local scaleX = self.direction == 'left' and -1 or 1
-    local offsetX = self.direction == 'left' and self.width or 0
+    local frameIndex = anim:getCurrentFrame()
+    local box = getEntityCollisionBox(self)
+
+    local scaleX = self.direction == 'right' and 1 or -1
+    local offsetX = self.direction == 'right' and box.x or -(box.width + box.x)
 
     love.graphics.draw(
         TEXTURES[anim.texture],
-        FRAMES[anim.texture][anim:getCurrentFrame()],
-        math.floor(self.x - self.offsetX + offsetX),
-        math.floor(self.y - self.offsetY),
+        FRAMES[anim.texture][frameIndex],
+        math.floor(self.x - offsetX),
+        math.floor(self.y),
         0, scaleX, 1
     )
-end
 
-function Entity:collides(target)
-    return not (
-        self.x + self.width < target.x or self.x > target.x + target.width or
-        self.y + self.height < target.y or self.y > target.y + target.height
-    )
+    self.updateHitbox(self)
+    if SHOW_HITBOXES then
+        love.graphics.setColor(love.math.colorFromBytes(255, 0, 255, 255))
+        love.graphics.rectangle('line', self.hitbox.x, self.hitbox.y, self.hitbox.width, self.hitbox.height)
+        love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))            
+    end
 end
 
 function Entity:damage(dmg)

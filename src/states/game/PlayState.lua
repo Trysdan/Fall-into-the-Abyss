@@ -17,7 +17,7 @@ function PlayState:init()
 end
 
 function PlayState:enter(params)
-    self.world = bump.newWorld(64)
+    self.world = bump.newWorld(16)
     self.map = sti('assets/maps/' .. params.map .. '.lua', { 'bump' })
     self.map:bump_init(self.world)
 
@@ -37,34 +37,69 @@ function PlayState:enter(params)
         y = params.playerStartY or 64,
         width = 32,
         height = 32,
-        jumpVelocity = -200,
+        jumpVelocity = -250,
         gravity = 500
     }
 
     self.player.stateMachine = StateMachine {
-        ['idle'] = function() return PlayerIdleState(self.player, self.world) end,
-        ['walk'] = function() return PlayerWalkState(self.player, self.world) end,
-        ['jump'] = function() return PlayerJumpState(self.player, self.world) end,
-        ['fall'] = function() return PlayerFallState(self.player, self.world) end,
-        ['attack'] = function() return PlayerAttackState(self.player, self.world) end,
-        ['dead'] = function() return PlayerDeadState(self.player, self.world) end
+        ['idle'] = function() return PlayerIdleState(self.player) end,
+        ['walk'] = function() return PlayerWalkState(self.player) end,
+        ['jump'] = function() return PlayerJumpState(self.player) end,
+        ['fall'] = function() return PlayerFallState(self.player) end,
+        ['attack'] = function() return PlayerAttackState(self.player) end,
+        ['dead'] = function() return PlayerDeadState(self.player) end
     }
 
+    self.bot = Player {
+        animations = ENTITY_DEFS['player'].animations,
+        walkSpeed = ENTITY_DEFS['player'].walkSpeed,
+        world = self.world,
+        x = 120,
+        y = 120,
+        width = 32,
+        height = 32,
+        jumpVelocity = -250,
+        gravity = 500
+    }
+
+    self.bot.stateMachine = StateMachine {
+        ['idle'] = function() return PlayerIdleState(self.bot) end,
+        ['walk'] = function() return PlayerWalkState(self.bot) end,
+        ['jump'] = function() return PlayerJumpState(self.bot) end,
+        ['fall'] = function() return PlayerFallState(self.bot) end,
+        ['attack'] = function() return PlayerAttackState(self.bot) end,
+        ['dead'] = function() return PlayerDeadState(self.bot) end
+    }
+
+    self.bot:changeState('dead')
     self.player:changeState('idle')
-    
+
     self.camera = camera()
-end
+end 
 
 function PlayState:update(dt)
     if wasPressedAny(CONTROLS.SELECT) then
         stateMachine:change('new')
     end
+    self.bot:update(dt)
     self.player:update(dt)
     self.map:update(dt)
-    self.camera:lookAt(self.player.x, self.player.y)
+    
+    local mapWidth = self.map.width * self.map.tilewidth
+    local mapHeight = self.map.height * self.map.tileheight
+    
+    local camX = math.max(VIRTUAL_WIDTH/2, math.min(self.player.x, mapWidth - VIRTUAL_WIDTH/2))
+    local camY = math.max(VIRTUAL_HEIGHT/2, math.min(self.player.y, mapHeight - VIRTUAL_HEIGHT/2))
+    
+    self.camera:lookAt(camX, camY)
 end
 
-function PlayState:render()
-    self.map:draw()
-    self.player:render()
+function PlayState:render()        
+    self.camera:attach(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
+        local cx, cy = self.camera:position()        
+        self.map:draw(-(cx - VIRTUAL_WIDTH/2), -(cy - VIRTUAL_HEIGHT/2), self.camera.scale, self.camera.scale)
+        
+        self.player:render()
+        self.bot:render()
+    self.camera:detach()
 end
