@@ -11,7 +11,7 @@
 ]]
 ENTITY_DEFS = {
     ['player'] = {
-        walkSpeed = 60,
+        walkSpeed = 80,  -- Aumentado para movimiento más fluido
         animations = {
             ['attack'] = {
                 frames = {1, 2, 3, 4, 5, 6, 7, 8},
