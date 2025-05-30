@@ -37,8 +37,7 @@ function PlayState:enter(params)
         y = params.playerStartY or 64,
         width = 32,
         height = 32,
-        jumpVelocity = -250,
-        gravity = 500
+        jumpVelocity = -250
     }
 
     self.player.stateMachine = StateMachine {

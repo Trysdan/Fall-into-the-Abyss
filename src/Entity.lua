@@ -43,9 +43,8 @@ function Entity:init(def)
     self.updateHitbox(self)
     self.world:add(self, self.hitbox.x, self.hitbox.y, self.hitbox.width, self.hitbox.height)
 
-    self.walkSpeed = def.walkSpeed or 60
-    self.jumpVelocity = def.jumpVelocity or -250
-    self.gravity = def.gravity or 500
+    self.walkSpeed = def.walkSpeed or 120
+    self.jumpVelocity = def.jumpVelocity or GRAVITY/3
 
     self.health = def.health or 1
 
@@ -110,7 +109,7 @@ function Entity:updatePosition(dt)
     self:updateHitbox()
     
     if not self.isOnGround then
-        self.dy = self.dy + self.gravity * dt
+        self.dy = self.dy + GRAVITY * dt
     end
 
     local goalX = self.x + self.dx * dt
@@ -175,6 +174,8 @@ function Entity:render()
 
     local scaleX = self.direction == 'right' and 1 or -1
     local offsetX = self.direction == 'right' and box.x or -(box.width + box.x)
+    
+    self:updateHitbox()
 
     love.graphics.draw(
         TEXTURES[anim.texture],
@@ -184,7 +185,6 @@ function Entity:render()
         0, scaleX, 1
     )
 
-    self.updateHitbox(self)
     if SHOW_HITBOXES then
         love.graphics.setColor(love.math.colorFromBytes(255, 0, 255, 255))
         love.graphics.rectangle('line', self.hitbox.x, self.hitbox.y, self.hitbox.width, self.hitbox.height)

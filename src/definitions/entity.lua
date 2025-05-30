@@ -21,12 +21,12 @@ ENTITY_DEFS = {
                 looping = false,
                 texture = 'character',
                 collisionBoxes = {
-                    {x = 6, y = 5, width = 14, height = 27},
-                    {x = 6, y = 5, width = 14, height = 27},
-                    {x = 6, y = 5, width = 14, height = 27},
-                    {x = 6, y = 5, width = 14, height = 27},
-                    {x = 6, y = 5, width = 14, height = 27},
-                    {x = 6, y = 5 , width = 14, height = 27}
+                    {x = 6, y = 5, width = 12, height = 27},
+                    {x = 6, y = 5, width = 12, height = 27},
+                    {x = 6, y = 5, width = 12, height = 27},
+                    {x = 6, y = 5, width = 12, height = 27},
+                    {x = 6, y = 5, width = 12, height = 27},
+                    {x = 6, y = 5 , width = 12, height = 27}
                     --{x = 6, y = 5, width = 14, height = 27},
                     --{x = 6, y = 5, width = 14, height = 27} 
                 }
@@ -48,9 +48,9 @@ ENTITY_DEFS = {
                 interval = 0.2,
                 texture = 'character',
                 collisionBoxes = {
-                    {x = 4, y = 0, width = 16, height = 32},
-                    {x = 4, y = 0, width = 16, height = 32},
-                    {x = 4, y = 0, width = 16, height = 32}
+                    {x = 6, y = 1, width = 14, height = 31},
+                    {x = 6, y = 1, width = 14, height = 31},
+                    {x = 6, y = 0, width = 14, height = 32}
                 }
             },
             ['idle'] = {
@@ -58,12 +58,12 @@ ENTITY_DEFS = {
                 interval = 0.15,
                 texture = 'character',
                 collisionBoxes = {
-                    {x = 6, y = 0, width = 14, height = 32},
-                    {x = 6, y = 0, width = 14, height = 32},
-                    {x = 6, y = 0, width = 14, height = 32},
-                    {x = 6, y = 0, width = 14, height = 32},
-                    {x = 6, y = 0, width = 14, height = 32},
-                    {x = 6, y = 0, width = 14, height = 32}
+                    {x = 6, y = 1, width = 12, height = 31},
+                    {x = 6, y = 1, width = 12, height = 31},
+                    {x = 6, y = 2, width = 12, height = 30},
+                    {x = 6, y = 2, width = 12, height = 30},
+                    {x = 6, y = 2, width = 12, height = 30},
+                    {x = 6, y = 1, width = 12, height = 31}
                 }
             },
             ['jump'] = {
@@ -71,8 +71,8 @@ ENTITY_DEFS = {
                 interval = 0.2,
                 texture = 'character',
                 collisionBoxes = {
-                    {x = 4, y = 0, width = 16, height = 32},
-                    {x = 4, y = 0, width = 16, height = 32}
+                    {x = 6, y = 1, width = 14, height = 31},
+                    {x = 6, y = 1, width = 14, height = 27}
                 }
             },
             ['walk'] = {
@@ -80,13 +80,13 @@ ENTITY_DEFS = {
                 interval = 0.1,
                 texture = 'character',
                 collisionBoxes = {
-                    {x = 4, y = 2, width = 15, height = 30},
-                    {x = 4, y = 3, width = 17, height = 29},
-                    {x = 3, y = 3, width = 19, height = 29},
-                    {x = 6, y = 4, width = 14, height = 28},
-                    {x = 8, y = 3, width = 11, height = 29},
+                    {x = 4, y = 2, width = 16, height = 30},
+                    {x = 4, y = 3, width = 16, height = 29},
+                    {x = 4, y = 3, width = 16, height = 29},
+                    {x = 6, y = 4, width = 16, height = 28},
+                    {x = 8, y = 3, width = 16, height = 29},
                     {x = 6, y = 3, width = 16, height = 29},
-                    {x = 4, y = 2, width = 14, height = 30}
+                    {x = 4, y = 2, width = 16, height = 30}
                 }
             }
         }

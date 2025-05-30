@@ -50,7 +50,9 @@ WINDOW_HEIGHT = VIRTUAL_HEIGHT * 3
 OFFSET_TITLE_X = 20
 OFFSET_TITLE_Y = 30
 
-SHOW_HITBOXES = false
+GRAVITY = 500
+
+SHOW_HITBOXES = true
 
 CONTROLS = {
     MOVE_UP = {'up', 'w'},
@@ -95,6 +97,8 @@ SOUNDS = {
     ['dungeon-music'] = love.audio.newSource('assets/sounds/dungeon_music.mp3', 'static')
 }
 
+local keysDown = {}
+
 function wasPressedAny(keys)
     for _, key in ipairs(keys) do
         if love.keyboard.wasPressed(key) then
@@ -107,6 +111,15 @@ end
 function isDownAny(keys)
     for _, key in ipairs(keys) do
         if love.keyboard.isDown(key) then
+            return true
+        end
+    end
+    return false
+end
+
+function isDownOrPressed(keys)
+    for _, key in ipairs(keys) do
+        if love.keyboard.isDown(key) or love.keyboard.wasPressed(key) then
             return true
         end
     end
