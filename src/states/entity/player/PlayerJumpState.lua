@@ -1,3 +1,16 @@
+--[[
+    ISPPV1 2025
+    Study Case: Fall into the Abyss (Platformer)
+
+    Based on: Super Martian (Platformer)
+    Author: Alejandro Mujica (alejandro.j.mujic4@gmail.com)
+
+    Adapted by: Jesus Diaz (jdanieldp99@gmail.com)
+    For ULA Game Dev Class 2025
+
+    This file contains the class PlayerJumpState for the player.
+]]
+
 PlayerJumpState = Class{__includes = BaseState}
 
 function PlayerJumpState:init(player)
