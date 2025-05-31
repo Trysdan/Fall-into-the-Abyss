@@ -98,10 +98,10 @@ FONTS = {
 }
 
 SOUNDS = {
-    ['start-music'] = love.audio.newSource('assets/sounds/start_music.mp3', 'static'),
+    ['start'] = love.audio.newSource('assets/sounds/start.mp3', 'static'),
     ['intro'] = love.audio.newSource('assets/sounds/intro.mp3', 'static'),
     ['switch'] = love.audio.newSource('assets/sounds/switch.mp3', 'static'),
-    ['dungeon-music'] = love.audio.newSource('assets/sounds/dungeon_music.mp3', 'static'),
+    ['abyss'] = love.audio.newSource('assets/sounds/abyss.mp3', 'static'),
     ['landing'] = love.audio.newSource('assets/sounds/landing.mp3', 'static'),
     ['jump'] = love.audio.newSource('assets/sounds/jump.mp3', 'static'),
     ['dead'] = love.audio.newSource('assets/sounds/dead.mp3', 'static'),

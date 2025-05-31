@@ -20,7 +20,7 @@ end
 
 function SelectState:exit()
     if self.option ~= 3 then
-        SOUNDS['start-music']:stop()
+        SOUNDS['start']:stop()
     end
 end
 

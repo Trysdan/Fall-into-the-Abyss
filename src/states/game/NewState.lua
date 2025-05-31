@@ -11,7 +11,6 @@
 
     This file contains the class NewState for the game.
 ]]
-    
 NewState = Class{__includes = BaseState}
 
 function NewState:init()

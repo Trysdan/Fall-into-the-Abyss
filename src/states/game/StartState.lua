@@ -15,9 +15,9 @@ StartState = Class{__includes = BaseState}
 local options = { 'play', 'credits', 'quit game' }
 
 function StartState:init()
-    SOUNDS['start-music']:setVolume(0.2)
-    SOUNDS['start-music']:setLooping(true)
-    SOUNDS['start-music']:play()
+    SOUNDS['start']:setVolume(0.2)
+    SOUNDS['start']:setLooping(true)
+    SOUNDS['start']:play()
     self.option = 1
 end
 

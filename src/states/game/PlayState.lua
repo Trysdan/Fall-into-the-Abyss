@@ -14,9 +14,9 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init()
-    SOUNDS['dungeon-music']:setVolume(0.2)
-    SOUNDS['dungeon-music']:setLooping(true)
-    SOUNDS['dungeon-music']:play()
+    SOUNDS['abyss']:setVolume(0.2)
+    SOUNDS['abyss']:setLooping(true)
+    SOUNDS['abyss']:play()
 end
 
 function PlayState:enter(params)

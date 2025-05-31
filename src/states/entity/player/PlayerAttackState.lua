@@ -10,7 +10,6 @@
 
     This file contains the class PlayerAttackState for the player.
 ]]
-
 PlayerAttackState = Class{__includes = BaseState}
 
 function PlayerAttackState:init(player)
