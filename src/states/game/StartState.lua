@@ -26,15 +26,13 @@ function StartState:update(dt)
         SOUNDS['switch']:stop()
         SOUNDS['switch']:play()
         self.option = self.option - 1
-    end
-
-    if wasPressedAny(CONTROLS.MOVE_DOWN) and self.option < 3 then
+        
+    elseif wasPressedAny(CONTROLS.MOVE_DOWN) and self.option < 3 then
         SOUNDS['switch']:stop()
         SOUNDS['switch']:play()
         self.option = self.option + 1
-    end
-
-    if wasPressedAny(CONTROLS.SELECT) then
+       
+    elseif wasPressedAny(CONTROLS.SELECT) then
         SOUNDS['switch']:stop()
         SOUNDS['switch']:play()
         if self.option == 1 then

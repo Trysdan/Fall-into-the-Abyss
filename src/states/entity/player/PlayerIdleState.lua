@@ -3,6 +3,8 @@ PlayerIdleState = Class{__includes = BaseState}
 function PlayerIdleState:init(player)
     self.entity = player
     self.entity:changeAnimation('idle')
+    self.entity.dy = 0
+    self.entity.dx = 0
 end
 
 function PlayerIdleState:update(dt)
@@ -20,7 +22,6 @@ function PlayerIdleState:update(dt)
     end
 
     if wasPressedAny(CONTROLS.JUMP) and self.entity.isOnGround then
-        self.entity.dy = -self.entity.jumpVelocity
         self.entity:changeState('jump')
     elseif wasPressedAny(CONTROLS.ATTACK_PRIMARY) then
         self.entity:changeState('attack')

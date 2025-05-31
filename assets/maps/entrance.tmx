@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="120" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="120" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="4">
  <editorsettings>
   <export target="entrance.lua" format="lua"/>
  </editorsettings>
@@ -261,6 +261,7 @@
  <layer id="3" name="Capa de patrones 3" width="80" height="120">
   <properties>
    <property name="collidable" type="bool" value="true"/>
+   <property name="one_way" type="bool" value="true"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

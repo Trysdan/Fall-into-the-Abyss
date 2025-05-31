@@ -93,16 +93,20 @@ FRAMES = {
 FONTS = {
     ['title'] = love.graphics.newFont('assets/fonts/title.otf', 40),
     ['title-small'] = love.graphics.newFont('assets/fonts/title.otf', 24),
-    ['credits'] = love.graphics.newFont('assets/fonts/credits.ttf', 10)
+    ['credits'] = love.graphics.newFont('assets/fonts/credits.ttf', 10),
+    ['text'] = love.graphics.newFont('assets/fonts/credits.ttf', 12)
 }
 
 SOUNDS = {
     ['start-music'] = love.audio.newSource('assets/sounds/start_music.mp3', 'static'),
+    ['intro'] = love.audio.newSource('assets/sounds/intro.mp3', 'static'),
     ['switch'] = love.audio.newSource('assets/sounds/switch.mp3', 'static'),
-    ['dungeon-music'] = love.audio.newSource('assets/sounds/dungeon_music.mp3', 'static')
+    ['dungeon-music'] = love.audio.newSource('assets/sounds/dungeon_music.mp3', 'static'),
+    ['landing'] = love.audio.newSource('assets/sounds/landing.mp3', 'static'),
+    ['jump'] = love.audio.newSource('assets/sounds/jump.mp3', 'static'),
+    ['dead'] = love.audio.newSource('assets/sounds/dead.mp3', 'static'),
+    ['sword'] = love.audio.newSource('assets/sounds/sword.mp3', 'static')
 }
-
-local keysDown = {}
 
 function wasPressedAny(keys)
     for _, key in ipairs(keys) do
@@ -116,15 +120,6 @@ end
 function isDownAny(keys)
     for _, key in ipairs(keys) do
         if love.keyboard.isDown(key) then
-            return true
-        end
-    end
-    return false
-end
-
-function isDownOrPressed(keys)
-    for _, key in ipairs(keys) do
-        if love.keyboard.isDown(key) or love.keyboard.wasPressed(key) then
             return true
         end
     end

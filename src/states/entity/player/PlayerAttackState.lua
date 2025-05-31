@@ -1,6 +1,8 @@
 PlayerAttackState = Class{__includes = BaseState}
 
 function PlayerAttackState:init(player)
+    SOUNDS['sword']:stop()
+    SOUNDS['sword']:play()
     self.entity = player
     self.entity:changeAnimation('attack')
     self.attackDuration = 0.5
@@ -19,7 +21,11 @@ function PlayerAttackState:update(dt)
     end
 
     self.timer = self.timer + dt
-    if self.timer >= self.attackDuration then  
-        self.entity:changeState('idle')      
+    if self.timer >= self.attackDuration then
+        if self.entity.dy > 0 then
+            self.entity:changeState('fall')
+        else
+            self.entity:changeState('idle')    
+        end
     end
 end

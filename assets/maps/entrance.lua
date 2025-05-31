@@ -9,8 +9,8 @@ return {
   height = 120,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 4,
-  nextobjectid = 1,
+  nextlayerid = 6,
+  nextobjectid = 4,
   properties = {},
   tilesets = {
     {
@@ -344,7 +344,8 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {
-        ["collidable"] = true
+        ["collidable"] = true,
+        ["one_way"] = true
       },
       encoding = "lua",
       data = {

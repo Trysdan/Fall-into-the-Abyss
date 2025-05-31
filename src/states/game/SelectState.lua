@@ -19,19 +19,25 @@ function SelectState:init()
 end
 
 function SelectState:exit()
-    SOUNDS['start-music']:stop()
+    if self.option ~= 3 then
+        SOUNDS['start-music']:stop()
+    end
 end
 
 function SelectState:update(dt)
     if wasPressedAny(CONTROLS.MOVE_UP) and self.option > 1 then
+        SOUNDS['switch']:stop()
+        SOUNDS['switch']:play()
         self.option = self.option - 1
-    end
 
-    if wasPressedAny(CONTROLS.MOVE_DOWN) and self.option < 3 then
+    elseif wasPressedAny(CONTROLS.MOVE_DOWN) and self.option < 3 then
+        SOUNDS['switch']:stop()
+        SOUNDS['switch']:play()
         self.option = self.option + 1
-    end
-
-    if wasPressedAny(CONTROLS.SELECT) then
+        
+    elseif wasPressedAny(CONTROLS.SELECT) then
+        SOUNDS['switch']:stop()
+        SOUNDS['switch']:play()
         if self.option == 1 then
             stateMachine:change('new')
         elseif self.option == 2 then
@@ -40,17 +46,6 @@ function SelectState:update(dt)
             stateMachine:change('start')
         end
     end
-end
-
-function wasPressedAny(keys)
-    for _, key in ipairs(keys) do
-        if love.keyboard.wasPressed(key) then
-            SOUNDS['switch']:stop()
-            SOUNDS['switch']:play()
-            return true
-        end
-    end
-    return false
 end
 
 function SelectState:render()

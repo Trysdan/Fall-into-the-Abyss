@@ -23,7 +23,6 @@ function PlayerWalkState:update(dt)
     end
 
     if wasPressedAny(CONTROLS.JUMP) and self.entity.isOnGround then
-        self.entity.dy = -self.entity.jumpVelocity
         self.entity:changeState('jump')
     elseif wasPressedAny(CONTROLS.ATTACK_PRIMARY) then
         self.entity:changeState('attack')

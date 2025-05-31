@@ -1,6 +1,8 @@
 PlayerJumpState = Class{__includes = BaseState}
 
 function PlayerJumpState:init(player)
+    SOUNDS['jump']:stop()
+    SOUNDS['jump']:play()
     self.entity = player
     self.entity:changeAnimation('jump')
     self.entity.dy = self.entity.jumpVelocity
@@ -20,7 +22,6 @@ function PlayerJumpState:update(dt)
     end
 
     if wasPressedAny(CONTROLS.JUMP) and self.entity.dobleJump then
-        self.entity.dy = -self.entity.jumpVelocity
         self.entity:changeState('jump')
         self.entity.dobleJump = false
     elseif wasPressedAny(CONTROLS.ATTACK_PRIMARY) then

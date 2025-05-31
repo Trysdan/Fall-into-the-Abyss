@@ -7,6 +7,8 @@ end
 
 function PlayerFallState:update(dt)
     if self.entity.isOnGround then
+        SOUNDS['landing']:stop()
+        SOUNDS['landing']:play()
         if math.abs(self.entity.dx) > 0 then
             self.entity:changeState('walk')
         else
@@ -23,7 +25,6 @@ function PlayerFallState:update(dt)
     end
 
     if wasPressedAny(CONTROLS.JUMP) and self.entity.dobleJump then
-        self.entity.dy = -self.entity.jumpVelocity
         self.entity:changeState('jump')
         self.entity.dobleJump = false
     elseif wasPressedAny(CONTROLS.ATTACK_PRIMARY) then

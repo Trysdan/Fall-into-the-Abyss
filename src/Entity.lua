@@ -138,9 +138,9 @@ function Entity:updatePosition(dt)
             self.isOnGround = true
             self.dobleJump = true
             self.dy = 0
+            
         elseif col.normal.y == 1 then
             self.dy = 0
-            
             -- Small adjustment to avoid being trapped on the roof
             self.y = self.y + 1
         end
@@ -148,6 +148,8 @@ function Entity:updatePosition(dt)
         if col.normal.x ~= 0 then
             self.bumped = true
             self.dx = 0
+            -- Small adjustment so as not to get caught in the wall
+            self.x = self.x + (col.normal.x > 0 and 1 or -1)
         end
     end
 end
