@@ -9,7 +9,7 @@
 WorldManager = Class{}
 
 function WorldManager:init()
-    self.world = bump.newWorld(64)
+    self.world = bump.newWorld(16)
     self.loadedChunks = {rooms = {}, corridors = {}}
     self.activeChunks = {rooms = {}, corridors = {}}
     self.chunkSize = {}

@@ -40,6 +40,13 @@ function Entity:init(def)
         offsetY = 4
     }
 
+    self.attackBox = {
+        x = 0,
+        y = 0,
+        w = 0,
+        h = 0
+    }
+
     self.updateHitbox(self)
     self.world:add(self, self.hitbox.x, self.hitbox.y, self.hitbox.width, self.hitbox.height)
 
@@ -47,6 +54,7 @@ function Entity:init(def)
     self.jumpVelocity = def.jumpVelocity or GRAVITY/3
 
     self.health = def.health or 1
+    self.power = def.power or 1
 
     -- flags for flashing the entity when hit
     self.invulnerable = false
@@ -113,15 +121,17 @@ function Entity:updatePosition(dt)
     local goalX = self.x + self.dx * dt
     local goalY = self.y + self.dy * dt
 
-    self.world:update(self, self.hitbox.x, self.hitbox.y, 
+    self.world:update(self, self.hitbox.x, self.hitbox.y,
                      self.hitbox.width, self.hitbox.height)
 
     local actualX, actualY, cols, len = self.world:move(
-        self, 
+        self,
         goalX,
         goalY + self.hitbox.offsetY,
         function(other) return 'slide' end
     )
+    
+    self.bumped = false
     
     self.x = actualX
     self.y = actualY - self.hitbox.offsetY
@@ -186,8 +196,18 @@ function Entity:render()
     )
 end
 
-function Entity:damage(dmg)
+function Entity:takeDamage(dmg)
     self.health = self.health - dmg
+    if self.health <= 0 then
+        self.dead = true
+        self:changeState('dead')
+    else
+        self:goInvulnerable(0.1)
+    end
+end
+
+function Entity:attack(target)
+    target:takeDamage(self.power)
 end
 
 function Entity:goInvulnerable(duration)

@@ -13,6 +13,10 @@ Player = Class{__includes = Entity}
 
 function Player:init(def)
     Entity.init(self, def)
+    self.isPlayer = true
+    
+    self.health = 5
+    self.health = 2
 end
 
 function Player:update(dt)
@@ -21,8 +25,9 @@ end
 
 function Player:render()
     Entity.render(self)
-
-    -- love.graphics.setColor(love.math.colorFromBytes(255, 0, 255, 255))
-    -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
-    -- love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))
+    if SHOW_HITBOXES then
+        love.graphics.setColor(love.math.colorFromBytes(255, 0, 255, 255))
+        love.graphics.rectangle('line', self.attackBox.x, self.attackBox.y, self.attackBox.w, self.attackBox.h)
+        love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))
+    end
 end

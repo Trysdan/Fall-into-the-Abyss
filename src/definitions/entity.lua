@@ -90,6 +90,221 @@ ENTITY_DEFS = {
                 }
             }
         }
+    },
+    ['skeleton'] = {
+        walkSpeed = 60,
+
+        animations = {
+            ['attack'] = {
+                texture = 'skeleton_attack',
+                frames = {
+                    1, 2, 3, 4, 5, 6, 7, 8, 9,
+                    10, 11, 12, 13, 14, 15, 16, 17, 18
+                },
+                interval = 0.08,
+                looping = false,
+                collisionBoxes = {
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24},
+                    {x = 5, y = 13, width = 9, height = 24}
+                }
+            },
+            ['dead'] = {
+                texture = 'skeleton_dead',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9, 10,
+                    11, 12, 13, 14, 15
+                },
+                interval = 0.1,
+                looping = false,
+                collisionBoxes = {
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 6, width = 20, height = 26},
+                    {x = 5, y = 25, width = 20, height = 7},
+                    {x = 5, y = 25, width = 20, height = 7},
+                    {x = 5, y = 25, width = 20, height = 7}
+                }
+            },
+            ['idle'] = {
+                texture = 'skeleton_idle',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9, 10, 11
+                },
+                interval = 0.15,
+                collisionBoxes = {
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25}
+                }
+            },
+            ['walk'] = {
+                texture = 'skeleton_walk',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9, 10, 11, 12, 13
+                },
+                interval = 0.05,
+                collisionBoxes = {
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25},
+                    {x = 2, y = 8, width = 9, height = 25}
+                }
+            }
+        }
+    },
+    ['goblin'] = {
+        walkSpeed = 80,
+
+        animations = {
+            ['attack'] = {
+                texture = 'goblin_attack',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9, 10, 11
+                },
+                interval = 0.08,
+                looping = false,
+                collisionBoxes = {
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 26, y = 30, width = 20, height = 38},
+                }
+            },
+            ['dead'] = {
+                texture = 'goblin_die',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9, 10, 11
+                },
+                interval = 0.1,
+                looping = false,
+                collisionBoxes = {
+                    {x = 26, y = 30, width = 20, height = 38},
+                    {x = 14, y = 36, width = 37, height = 31},
+                    {x = 14, y = 36, width = 37, height = 31},
+                    {x = 14, y = 36, width = 37, height = 31},
+                    {x = 14, y = 36, width = 37, height = 31},
+                    {x = 14, y = 36, width = 37, height = 31},
+                    {x = 14, y = 36, width = 37, height = 31},
+                    {x = 14, y = 36, width = 37, height = 31},
+                    {x = 14, y = 55, width = 42, height = 12},
+                    {x = 14, y = 55, width = 42, height = 12},
+                    {x = 14, y = 55, width = 42, height = 12},
+                }
+            },
+            ['idle'] = {
+                texture = 'goblin_idle',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9
+                },
+                interval = 0.15,
+                collisionBoxes = {
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                }
+            },
+            ['walk'] = {
+                texture = 'goblin_walk',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9
+                },
+                interval = 0.15,
+                collisionBoxes = {
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                }
+            },
+            ['run'] = {
+                texture = 'goblin_run',
+                frames = {
+                    1, 2, 3, 4, 5,
+                    6, 7, 8, 9, 10, 11
+                },
+                interval = 0.08,
+                collisionBoxes = {
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                    {x = 26, y = 29, width = 20, height = 38},
+                }
+            }
+        }
     }
 }
 

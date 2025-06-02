@@ -22,7 +22,6 @@ end
 function PlayState:enter(params)
     -- fast reset
     self.params = params
-    
     self.world = bump.newWorld(16)
     self.map = sti('assets/maps/' .. params.map .. '.lua', { 'bump' })
     self.map:bump_init(self.world)
@@ -56,6 +55,40 @@ function PlayState:enter(params)
     }
     self.player:changeState('idle')
 
+    self.skeleton = Enemy {
+        animations = ENTITY_DEFS['skeleton'].animations,
+        walkSpeed = ENTITY_DEFS['skeleton'].walkSpeed,
+        x = 640,
+        y = 1584,
+        world = self.world,
+        player = self.player
+    }
+    self.skeleton2 = Enemy {
+        animations = ENTITY_DEFS['skeleton'].animations,
+        walkSpeed = ENTITY_DEFS['skeleton'].walkSpeed,
+        x = 640-200,
+        y = 1584,
+        world = self.world,
+        player = self.player
+    }
+    self.skeleton3 = Enemy {
+        animations = ENTITY_DEFS['skeleton'].animations,
+        walkSpeed = ENTITY_DEFS['skeleton'].walkSpeed,
+        x = 640+200,
+        y = 1584,
+        world = self.world,
+        player = self.player
+    }
+    self.boss = Enemy {
+        animations = ENTITY_DEFS['goblin'].animations,
+        walkSpeed = ENTITY_DEFS['goblin'].walkSpeed,
+        x = 752,
+        y = 1120,
+        world = self.world,
+        player = self.player,
+        health = 10
+    }
+
     self.camera = camera()
 end 
 
@@ -70,6 +103,10 @@ function PlayState:update(dt)
     end
 
     self.player:update(dt)
+    self.skeleton:update(dt)
+    self.skeleton2:update(dt)
+    self.skeleton3:update(dt)
+    self.boss:update(dt)
     self.map:update(dt)
     
     local mapWidth = self.map.width * self.map.tilewidth
@@ -90,6 +127,10 @@ function PlayState:render()
             self.map:bump_draw()
         end
         
+        self.skeleton:render()
+        self.skeleton2:render()
+        self.skeleton3:render()
+        self.boss:render()
         self.player:render()
     self.camera:detach()
 end

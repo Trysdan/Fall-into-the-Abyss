@@ -25,6 +25,7 @@ require 'src/Animation'
 require 'src/StateMachine'
 require 'src/Entity'
 require 'src/Player'
+require 'src/Enemy'
 
 require 'src/definitions/entity'
 
@@ -44,6 +45,12 @@ require 'src/states/entity/player/PlayerFallState'
 require 'src/states/entity/player/PlayerAttackState'
 require 'src/states/entity/player/PlayerDeadState'
 
+require 'src/states/entity/enemy/EnemyAttackState'
+require 'src/states/entity/enemy/EnemyChaseState'
+require 'src/states/entity/enemy/EnemyIdleState'
+require 'src/states/entity/enemy/EnemyPatrolState'
+require 'src/states/entity/enemy/EnemyDeadState'
+
 require 'src/utilities/quads'
 
 VIRTUAL_WIDTH = 384
@@ -59,7 +66,7 @@ GRAVITY = 500
 
 --------DEBUG---------
 SHOW_HITBOXES = false
-CONST_COLLISION = true
+CONST_COLLISION = false
 ----------------------
 
 CONTROLS = {
@@ -86,11 +93,29 @@ CONTROLS = {
 
 TEXTURES = {
     ['background'] = love.graphics.newImage('assets/textures/background.png'),
-    ['character'] = love.graphics.newImage('assets/textures/character/spritesheet.png')
+    ['character'] = love.graphics.newImage('assets/textures/character/spritesheet.png'),
+    ['skeleton_attack'] = love.graphics.newImage('assets/textures/enemies/skeleton_attack.png'),
+    ['skeleton_dead'] = love.graphics.newImage('assets/textures/enemies/skeleton_dead.png'),
+    ['skeleton_idle'] = love.graphics.newImage('assets/textures/enemies/skeleton_idle.png'),
+    ['skeleton_walk'] = love.graphics.newImage('assets/textures/enemies/skeleton_walk.png'),
+    ['goblin_attack'] = love.graphics.newImage('assets/textures/enemies/goblin/goblin_attack.png'),
+    ['goblin_die'] = love.graphics.newImage('assets/textures/enemies/goblin/goblin_die.png'),
+    ['goblin_idle'] = love.graphics.newImage('assets/textures/enemies/goblin/goblin_idle.png'),
+    ['goblin_run'] = love.graphics.newImage('assets/textures/enemies/goblin/goblin_run.png'),
+    ['goblin_walk'] = love.graphics.newImage('assets/textures/enemies/goblin/goblin_walk.png')
 }
 
 FRAMES = {
-    ['character'] = generateQuads(TEXTURES['character'], 32, 32)
+    ['character'] = generateQuads(TEXTURES['character'], 32, 32),
+    ['skeleton_attack'] = generateQuads(TEXTURES['skeleton_attack'], 43, 37),
+    ['skeleton_dead'] = generateQuads(TEXTURES['skeleton_dead'], 33, 32),
+    ['skeleton_idle'] = generateQuads(TEXTURES['skeleton_idle'], 24, 32),
+    ['skeleton_walk'] = generateQuads(TEXTURES['skeleton_walk'], 22, 32),
+    ['goblin_attack'] = generateQuads(TEXTURES['goblin_attack'], 70, 70),
+    ['goblin_die'] = generateQuads(TEXTURES['goblin_die'], 70, 70),
+    ['goblin_idle'] = generateQuads(TEXTURES['goblin_idle'], 70, 70),
+    ['goblin_run'] = generateQuads(TEXTURES['goblin_run'], 70, 70),
+    ['goblin_walk'] = generateQuads(TEXTURES['goblin_walk'], 70, 70)
 }
 
 FONTS = {

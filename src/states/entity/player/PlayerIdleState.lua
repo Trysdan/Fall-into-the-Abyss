@@ -16,7 +16,7 @@ PlayerIdleState = Class{__includes = BaseState}
 function PlayerIdleState:init(player)
     self.entity = player
     self.entity:changeAnimation('idle')
-    self.entity.dy = 0
+    self.entity.dy = 0 --revisar luego
     self.entity.dx = 0
 end
 
