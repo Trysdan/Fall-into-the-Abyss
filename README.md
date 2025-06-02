@@ -47,37 +47,23 @@
 |-----------------------|----------------------------------|
 | Movement              | Arrow Keys or WASD               |
 | Jump                  | Space                            |
-| Roll/Dodge            | Left/Right Shift                 |
-| Interact              | F                                |
 | Primary Attack        | E                                |
-| Secondary Attack      | Q                                |
-| Use Skill             | R                                |
-| Pause Game            | Escape or P                      |
-| Open Inventory        | Tab or I                         |
-| Open Map              | M                                |
-| Select/Confirm        | Enter/Return                     |
-| Back/Cancel           | Escape or Backspace              |
+| Select/Confirm        | Return                           |
 
 ## Features
 - Physics-based platforming using bump.lua
 - Dynamic camera control with camara.lua
 - Tile-based maps with STI library
-- Multiple movement abilities (jump, roll/dodge)
-- Combat system with primary and secondary attacks
-- Skill system for special abilities
-- Inventory and map systems
-- Dark abyss exploration theme
+- Combat system with primary
 
 ## How to Play
 1. Navigate through the treacherous abyss using your movement skills
 2. Defeat enemies and overcome environmental challenges
 3. Find your way out of the ever-changing depths
-4. Use your inventory and skills strategically to progress
 
 ## Gameplay Mechanics
 - Platforming challenges with precise movement
 - Combat encounters with various enemy types
-- Environmental puzzles and obstacles
 - Progressive difficulty as you ascend from the abyss
 
 Project created for video game programming practice course using LÖVE2D framework.
