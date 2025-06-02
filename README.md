@@ -81,3 +81,5 @@
 - Progressive difficulty as you ascend from the abyss
 
 Project created for video game programming practice course using LÖVE2D framework.
+
+https://docs.google.com/presentation/d/16k1AjE4jxJorbHSq1YXxP-bi14kw1RWBbTTAJVeUhso/edit?usp=sharing
