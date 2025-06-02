@@ -57,7 +57,10 @@ OFFSET_TITLE_Y = 30
 
 GRAVITY = 500
 
-SHOW_HITBOXES = true
+--------DEBUG---------
+SHOW_HITBOXES = false
+CONST_COLLISION = true
+----------------------
 
 CONTROLS = {
     MOVE_UP = {'up', 'w'},

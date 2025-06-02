@@ -96,7 +96,12 @@ ENTITY_DEFS = {
 -- Auxiliary function to obtain the collision box according to the current frame
 function getEntityCollisionBox(entity)
     local currentAnim = entity.currentAnimation
-    local defaultBox = {x = 4, y = 4, width = 14, height = 28}
+    local defaultBox = {x = 6, y = 2, width = 12, height = 30}
+
+    --to deactivate custom collisions
+    if CONST_COLLISION then
+        return defaultBox
+    end
     
     if not currentAnim or not currentAnim.collisionBoxes then
         return defaultBox

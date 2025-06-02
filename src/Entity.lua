@@ -58,7 +58,7 @@ function Entity:init(def)
     
     self.bumped = false
     self.isOnGround = false
-    self.dobleJump = true
+    self.dobleJump = false
 end
 
 function Entity:createAnimations(animations)
@@ -108,9 +108,7 @@ end
 function Entity:updatePosition(dt)
     self:updateHitbox()
     
-    if not self.isOnGround then
-        self.dy = self.dy + GRAVITY * dt
-    end
+    self.dy = self.dy + GRAVITY * dt
 
     local goalX = self.x + self.dx * dt
     local goalY = self.y + self.dy * dt
@@ -127,9 +125,6 @@ function Entity:updatePosition(dt)
     
     self.x = actualX
     self.y = actualY - self.hitbox.offsetY
-
-    self.isOnGround = false
-    self.bumped = false
 
     for i = 1, len do
         local col = cols[i]
@@ -189,12 +184,6 @@ function Entity:render()
         math.floor(self.y),
         0, scaleX, 1
     )
-
-    if SHOW_HITBOXES then
-        love.graphics.setColor(love.math.colorFromBytes(255, 0, 255, 255))
-        love.graphics.rectangle('line', self.hitbox.x, self.hitbox.y, self.hitbox.width, self.hitbox.height)
-        love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))            
-    end
 end
 
 function Entity:damage(dmg)

@@ -19,6 +19,7 @@ function PlayerJumpState:init(player)
     self.entity = player
     self.entity:changeAnimation('jump')
     self.entity.dy = self.entity.jumpVelocity
+    self.entity.isOnGround = false
 end
 
 function PlayerJumpState:update(dt)

@@ -86,6 +86,10 @@ function PlayState:render()
         local cx, cy = self.camera:position()        
         self.map:draw(-(cx - VIRTUAL_WIDTH/2), -(cy - VIRTUAL_HEIGHT/2), self.camera.scale, self.camera.scale)
         
+        if SHOW_HITBOXES then
+            self.map:bump_draw()
+        end
+        
         self.player:render()
     self.camera:detach()
 end

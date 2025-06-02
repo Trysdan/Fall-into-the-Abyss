@@ -16,6 +16,7 @@ PlayerWalkState = Class{__includes = BaseState}
 function PlayerWalkState:init(player)
     self.entity = player
     self.entity:changeAnimation('walk')
+    self.entity.dy = 0
 end
 
 function PlayerWalkState:update(dt)
