@@ -54,7 +54,7 @@
 - Physics-based platforming using bump.lua
 - Dynamic camera control with camara.lua
 - Tile-based maps with STI library
-- Combat system with primary
+- Combat system
 
 ## How to Play
 1. Navigate through the treacherous abyss using your movement skills
