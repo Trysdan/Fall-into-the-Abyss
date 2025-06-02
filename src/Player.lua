@@ -14,9 +14,6 @@ Player = Class{__includes = Entity}
 function Player:init(def)
     Entity.init(self, def)
     self.isPlayer = true
-    
-    self.health = 5
-    self.health = 2
 end
 
 function Player:update(dt)

@@ -37,6 +37,7 @@ require 'src/states/game/CreditsState'
 require 'src/states/game/NewState'
 require 'src/states/game/ContinueState'
 require 'src/states/game/PlayState'
+require 'src/states/game/WinState'
 
 require 'src/states/entity/player/PlayerIdleState'
 require 'src/states/entity/player/PlayerWalkState'

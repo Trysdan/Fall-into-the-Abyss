@@ -26,7 +26,8 @@ function love.load()
         ['credits'] = function() return CreditsState() end,
         ['new'] = function() return NewState() end,
         ['continue'] = function() return ContinueState() end,
-        ['play'] = function() return PlayState() end
+        ['play'] = function() return PlayState() end,
+        ['win'] = function() return WinState() end
     }
 
     stateMachine:change('start')

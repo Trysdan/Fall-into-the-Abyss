@@ -42,7 +42,9 @@ function PlayState:enter(params)
         y = params.playerStartY or 64,
         width = 32,
         height = 32,
-        jumpVelocity = -250
+        jumpVelocity = -250,
+        health = 5,
+        power = 5
     }
 
     self.player.stateMachine = StateMachine {
@@ -86,16 +88,29 @@ function PlayState:enter(params)
         y = 1120,
         world = self.world,
         player = self.player,
-        health = 10
+        health = 20,
+        power = 2
     }
 
     self.camera = camera()
+
+    self.time = 0
+    self.timer = 3
 end 
 
 function PlayState:update(dt)
+    if self.boss.dead then
+        self.time = self.time + dt
+        
+        if self.time > self.timer then
+            stateMachine:change('win')
+            return
+        end
+    end
+
     -- fast reset
     if wasPressedAny(CONTROLS.SELECT) then
-        stateMachine:change('play', self.params)
+        stateMachine:change('new', self.params)
     end
     -- fast dead
     if  wasPressedAny(CONTROLS.INTERACT) and not self.player.dead then
